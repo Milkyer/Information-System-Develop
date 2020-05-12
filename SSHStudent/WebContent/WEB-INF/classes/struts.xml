@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.allowed.action.names" value="[a-zA-Z0-9._!/\-]*"></constant>
+    <package name="SSHStudent" namespace="/" extends="struts-default">
+        
+        <action name="addAction" class="stdAct" method="insert">
+            <result name="good"> jsp/StudentInfor.jsp </result>
+            <result name="error"> jsp/error.jsp </result>
+            
+        </action>
+        
+        <action name="updAction" class="stdAct" method="update">
+            <result name="good"> jsp/StudentInfor.jsp </result>
+            
+        </action>
+        
+        <action name="delAction" class="stdAct" method="delete">
+            <result name="good"> jsp/StudentInfor.jsp </result>
+            
+        </action>
+        
+        <action name="sldAction" class="stdAct" method="selectAll">
+            <result name="good"> jsp/StudentInfor.jsp </result>
+            
+        </action>
+        
+        
+    </package>
+
+    <!-- Add packages here -->
+
+</struts>

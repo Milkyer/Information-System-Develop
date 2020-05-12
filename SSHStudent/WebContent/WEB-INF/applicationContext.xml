@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="net.sourceforge.jtds.jdbcx.JtdsDataSource">
+		</property>
+		<property name="url"
+			value="jdbc:jtds:sqlserver://localhost:1433/student">
+		</property>
+		<property name="username" value="sa"></property>
+		<property name="password" value="111111"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SybaseDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>Model/LoginInfo.hbm.xml</value>
+				<value>model/StudentInfo.hbm.xml</value></list>
+		</property></bean>
+	<bean id="LoginInfoDAO" class="dao.LoginInfoDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StudentInfoDAO" class="dao.StudentInfoDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="stdAct" class="action.StudentAction">
+		<property name="stdServ">
+			<ref bean="stdServ1" />
+		</property>
+	</bean>
+	
+	<bean id="stdServ1" class="service.impl.StudentServiceImpl">
+		<property name="stdDao">
+			<ref bean="StudentInfoDAO" />
+		</property>
+	</bean>
+	
+	
+</beans>
